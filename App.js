@@ -2,12 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import Navigation from "./navigation/Navigation";
+import Restaurants from "./screens/Restaurants.js";
+import Account from './screens/Account'   
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>hello World!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Navigation/>
   );
 }
 
