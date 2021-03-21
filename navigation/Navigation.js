@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from 'react-native-elements'
 
 import Restaurants from "../screens/Restaurants";
-import Account from "../screens/Account";
+import Account from "../screens/account/Account";
 import Favorites from "../screens/Favorites";
 import Search from "../screens/Search";
 import TopRestaurants from "../screens/TopRestaurants";
@@ -57,8 +57,8 @@ export default function Navigation() {
             <Tab.Navigator
                 initialRouteName="restaurants"
                 tabBarOptions={{
-                    inactiveTintColor: '#442484',
-                    activeTintColor: '#a17dc3'
+                    inactiveTintColor: '#a17dc3',
+                    activeTintColor: '#442484'
 
                 }}
                 screenOptions={({route}) => ({
