@@ -3,6 +3,12 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Input, Button, Icon } from 'react-native-elements'
 import { validateEmail } from '../../utils/helpers'
+import { useNavigation } from "@react-navigation/native";
+
+import { registerUser } from "../../utils/actions";
+import Loading from '../Loading'
+
+
 
 export default function RegisterForm() {
 
@@ -11,19 +17,28 @@ export default function RegisterForm() {
     const [errorEmail, setErrorEmail] = useState("")
     const [errorPassword, setErrorPassword] = useState("")
     const [errorConfirm, setErrorConfirm] = useState("")
-
+    const [loading, setLoading] = useState(false)
     
+    const navigation = useNavigation();
 
     const onChange = (e, type) => {
         setFormData({ ...formData, [type]: e.nativeEvent.text })
     }
 
-    const registerUser = () => {
+    const registerNewUser = async() => {
         if (!validateData()) {
             return;
         }
+        setLoading(true)
 
-        console.log("fuck yeah!")
+        const result = await registerUser(formData.email, formData.password)
+        setLoading(false)
+        if (!result.statusResponse) {
+            setErrorEmail(result.error)
+            return
+        }
+
+        navigation.navigate("account")
     }
 
     const validateData = () => {
@@ -100,8 +115,9 @@ export default function RegisterForm() {
                 title = "Register User"
                 containerStyle = {styles.btnContainer}
                 buttonStyle = {styles.button}
-                onPress = { () => registerUser()}
+                onPress = { () => registerNewUser()}
             />
+            <Loading isVisible = {loading} text = "Loading..."/>
         </View>
     )
 
