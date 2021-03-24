@@ -24,9 +24,17 @@ export default function UserLogged() {
     return (
         <View style={styles.container}>
             {
-                user && <InfoUser user={user}/>
+                user  && (
+                    <View>
+                        <InfoUser 
+                            user={user} 
+                            setLoading={setLoading} 
+                            setLoadingText={setLoadingText}/>
+                        <Text>Account options...</Text>
+                    </View>
+                )
+                
             }
-            <Text>Account options...</Text>
 
             <Button
                 buttonStyle = {styles.btnLogOut}
